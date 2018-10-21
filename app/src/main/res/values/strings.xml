@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WordPress</string>
+
+    <string name="title">Title</string>
+    <string name="excerpt">Excerpt</string>
+    <string name="author">Author</string>
+    <string name="date">Date</string>
 </resources>
