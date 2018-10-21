@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.tylermarien.wordpress.data.Post
 import kotlinx.android.synthetic.main.view_post.view.*
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class PostAdapter(val posts: List<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
@@ -30,6 +29,7 @@ class PostAdapter(val posts: List<Post>): RecyclerView.Adapter<PostAdapter.ViewH
         holder.view.excerpt.text = toHtml(post.excerpt)
         holder.view.author.text = post.author.name
         holder.view.date.text = DateFormatter.format(post.date)
+        holder.view.comments_count.text = post.discussion.commentsCount.toString()
     }
 
     class ViewHolder(val view: CardView): RecyclerView.ViewHolder(view)

@@ -19,5 +19,6 @@ data class Post(
     val content: String,
     val excerpt: String,
     val slug: String,
-    val giud: String
+    val guid: String,
+    val discussion: Discussion
 )

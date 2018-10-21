@@ -9,6 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.util.*
 
 interface WordPressService {
@@ -29,6 +30,7 @@ interface WordPressService {
 
         private var moshi = Moshi.Builder()
             .add(Date::class.java, Rfc3339DateJsonAdapter())
+            .add(KotlinJsonAdapterFactory())
             .build()
 
         private val retrofit = Retrofit.Builder()
