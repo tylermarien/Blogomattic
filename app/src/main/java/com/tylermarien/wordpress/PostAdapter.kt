@@ -1,7 +1,5 @@
 package com.tylermarien.wordpress
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -12,9 +10,6 @@ import android.view.ViewGroup
 import com.tylermarien.wordpress.data.Post
 import kotlinx.android.synthetic.main.view_post.view.*
 import java.text.SimpleDateFormat
-import android.graphics.drawable.BitmapDrawable
-import com.squareup.picasso.Picasso
-
 
 class PostAdapter(
     val posts: List<Post>,
@@ -60,13 +55,4 @@ fun fromHtml(source: String, imageGetter: Html.ImageGetter? = null): Spanned {
     } else {
         Html.fromHtml(source, imageGetter, null)
     }
-}
-
-class ImageGetter(private val context: Context): Html.ImageGetter {
-
-    override fun getDrawable(source: String?): Drawable {
-        val bmp = Picasso.with(context).load(source).get()
-        return BitmapDrawable(context.resources, bmp)
-    }
-
 }
