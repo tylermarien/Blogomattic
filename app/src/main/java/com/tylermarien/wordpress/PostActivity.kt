@@ -4,12 +4,11 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_post.*
 import java.text.SimpleDateFormat
 import android.util.DisplayMetrics
-import android.util.Log
-
 
 class PostActivity: AppCompatActivity() {
 
@@ -25,7 +24,6 @@ class PostActivity: AppCompatActivity() {
 
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
-        Log.d("Density", displayMetrics.density.toString())
         val maxWidth = displayMetrics.widthPixels.toFloat() + (16 * displayMetrics.density)
 
         model.post.observe(this, Observer { post ->
@@ -35,6 +33,7 @@ class PostActivity: AppCompatActivity() {
                 authorView.text = it.author.name
                 dateView.text = DateFormatter.format(it.date)
                 contentView.text = fromHtml(it.content, PicassoImageGetter(contentView, this, maxWidth))
+                contentView.movementMethod = LinkMovementMethod.getInstance()
             }
         })
 
