@@ -2,12 +2,14 @@ package com.tylermarien.wordpress
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.tylermarien.wordpress.data.Post
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PostAdapter.OnClickListener {
 
     private val model by lazy {
         ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -22,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    override fun onPostClicked(post: Post) {
+        val intent = Intent(this, PostActivity::class.java).apply {
+            putExtra(PostActivity.PARAM_POST, post)
+        }
+
+        startActivity(intent)
+    }
+
     private fun setupViews() {
         posts.layoutManager = LinearLayoutManager(this)
     }
@@ -33,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         model.posts.observe(this, Observer {
             if (it != null) {
-                posts.adapter = PostAdapter(it)
+                posts.adapter = PostAdapter(it, this)
             }
         })
 

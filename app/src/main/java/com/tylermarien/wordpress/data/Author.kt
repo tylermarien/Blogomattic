@@ -1,7 +1,10 @@
 package com.tylermarien.wordpress.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Author(
     @Json(name="ID")
     val id: Int,
@@ -22,4 +25,4 @@ data class Author(
     val profileUrl: String,
     @Json(name="site_ID")
     val siteId: Int
-)
+): Parcelable

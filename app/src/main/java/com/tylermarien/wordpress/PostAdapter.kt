@@ -1,5 +1,7 @@
 package com.tylermarien.wordpress
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -10,8 +12,18 @@ import android.view.ViewGroup
 import com.tylermarien.wordpress.data.Post
 import kotlinx.android.synthetic.main.view_post.view.*
 import java.text.SimpleDateFormat
+import android.graphics.drawable.BitmapDrawable
+import com.squareup.picasso.Picasso
 
-class PostAdapter(val posts: List<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+
+class PostAdapter(
+    val posts: List<Post>,
+    private val listener: OnClickListener
+): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+
+    interface OnClickListener {
+        fun onPostClicked(post: Post)
+    }
 
     override fun getItemCount() = posts.size
 
@@ -25,11 +37,14 @@ class PostAdapter(val posts: List<Post>): RecyclerView.Adapter<PostAdapter.ViewH
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
 
-        holder.view.title.text = post.title
-        holder.view.excerpt.text = toHtml(post.excerpt)
-        holder.view.author.text = post.author.name
-        holder.view.date.text = DateFormatter.format(post.date)
-        holder.view.comments_count.text = post.discussion.commentsCount.toString()
+        holder.view.setOnClickListener {
+            listener.onPostClicked(post)
+        }
+        holder.view.titleView.text = post.title
+        holder.view.excerptView.text = fromHtml(post.excerpt)
+        holder.view.authorView.text = post.author.name
+        holder.view.dateView.text = DateFormatter.format(post.date)
+        holder.view.commentsCountView.text = post.discussion.commentsCount.toString()
     }
 
     class ViewHolder(val view: CardView): RecyclerView.ViewHolder(view)
@@ -39,10 +54,19 @@ class PostAdapter(val posts: List<Post>): RecyclerView.Adapter<PostAdapter.ViewH
     }
 }
 
-fun toHtml(source: String): Spanned {
+fun fromHtml(source: String, imageGetter: Html.ImageGetter? = null): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(source, Html.FROM_HTML_MODE_COMPACT)
+        Html.fromHtml(source, Html.FROM_HTML_MODE_COMPACT, imageGetter, null)
     } else {
-        Html.fromHtml(source)
+        Html.fromHtml(source, imageGetter, null)
     }
+}
+
+class ImageGetter(private val context: Context): Html.ImageGetter {
+
+    override fun getDrawable(source: String?): Drawable {
+        val bmp = Picasso.with(context).load(source).get()
+        return BitmapDrawable(context.resources, bmp)
+    }
+
 }

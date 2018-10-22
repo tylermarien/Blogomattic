@@ -1,8 +1,11 @@
 package com.tylermarien.wordpress.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Post(
     @Json(name="ID")
     val id: Int,
@@ -21,4 +24,4 @@ data class Post(
     val slug: String,
     val guid: String,
     val discussion: Discussion
-)
+): Parcelable

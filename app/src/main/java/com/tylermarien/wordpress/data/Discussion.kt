@@ -1,7 +1,10 @@
 package com.tylermarien.wordpress.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Discussion(
     @Json(name="comments_open")
     val commentsOpen: Boolean,
@@ -13,4 +16,4 @@ data class Discussion(
     val pingStatus: String,
     @Json(name="comment_count")
     val commentsCount: Int
-)
+): Parcelable

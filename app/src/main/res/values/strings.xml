@@ -5,4 +5,5 @@
     <string name="excerpt">Excerpt</string>
     <string name="author">Author</string>
     <string name="date">Date</string>
+    <string name="content">Content</string>
 </resources>
