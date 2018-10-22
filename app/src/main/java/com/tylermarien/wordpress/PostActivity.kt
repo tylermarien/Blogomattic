@@ -2,6 +2,7 @@ package com.tylermarien.wordpress
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.method.LinkMovementMethod
@@ -9,6 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_post.*
 import java.text.SimpleDateFormat
 import android.util.DisplayMetrics
+import com.tylermarien.wordpress.data.Post
 
 class PostActivity: AppCompatActivity() {
 
@@ -34,6 +36,9 @@ class PostActivity: AppCompatActivity() {
                 dateView.text = DateFormatter.format(it.date)
                 contentView.text = fromHtml(it.content, PicassoImageGetter(contentView, this, maxWidth))
                 contentView.movementMethod = LinkMovementMethod.getInstance()
+                commentsCountView.text = it.discussion.commentsCount.toString()
+                commentsIconView.setOnClickListener { _ -> openComments(it) }
+                commentsCountView.setOnClickListener { _ -> openComments(it) }
             }
         })
 
@@ -47,6 +52,14 @@ class PostActivity: AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun openComments(post: Post) {
+        val intent = Intent(this, CommentsActivity::class.java).apply {
+            putExtra(CommentsActivity.PARAM_POST, post)
+        }
+
+        startActivity(intent)
     }
 
     companion object {

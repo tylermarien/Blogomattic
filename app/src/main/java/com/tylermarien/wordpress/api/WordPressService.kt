@@ -10,11 +10,15 @@ import retrofit2.http.GET
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.http.Path
 import java.util.*
 
 interface WordPressService {
     @GET("posts")
     fun allPosts(): Single<PostsResponse>
+
+    @GET("posts/{postId}/replies")
+    fun commentsByPost(@Path("postId") postId: Int): Single<CommentsResponse>
 
     companion object {
         private const val BASE_URL =
@@ -43,4 +47,5 @@ interface WordPressService {
         val instance: WordPressService = retrofit.create(
             WordPressService::class.java)
     }
+
 }

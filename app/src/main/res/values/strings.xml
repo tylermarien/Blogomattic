@@ -6,4 +6,5 @@
     <string name="author">Author</string>
     <string name="date">Date</string>
     <string name="content">Content</string>
+    <string name="chat_bubble">Chat Bubble</string>
 </resources>
