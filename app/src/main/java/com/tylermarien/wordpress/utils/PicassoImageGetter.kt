@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable

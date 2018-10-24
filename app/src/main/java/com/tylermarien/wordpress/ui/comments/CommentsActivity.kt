@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.comments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
+import com.tylermarien.wordpress.ui.dialogs.ErrorDialog
+import com.tylermarien.wordpress.R
+import com.tylermarien.wordpress.utils.Status
 import kotlinx.android.synthetic.main.activity_comments.*
 
 class CommentsActivity: AppCompatActivity() {
@@ -55,13 +58,16 @@ class CommentsActivity: AppCompatActivity() {
 
         model.comments.observe(this, Observer {
             it?.let { comments ->
-                commentsView.adapter = CommentAdapter(comments)
+                commentsView.adapter =
+                        CommentAdapter(comments)
             }
         })
 
         model.error.observe(this, Observer {
             it?.let { message ->
-                ErrorDialog.create(message).show(supportFragmentManager, ErrorDialog.TAG)
+                ErrorDialog.create(message).show(supportFragmentManager,
+                    ErrorDialog.TAG
+                )
             }
         })
     }

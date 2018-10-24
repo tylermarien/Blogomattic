@@ -1,12 +1,13 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.posts
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.tylermarien.wordpress.utils.Status
 import com.tylermarien.wordpress.data.Post
 import com.tylermarien.wordpress.data.PostRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class MainViewModel: ViewModel() {
+class PostsViewModel: ViewModel() {
     private val disposables = CompositeDisposable()
     private val postRepo = PostRepository()
 

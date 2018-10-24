@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog

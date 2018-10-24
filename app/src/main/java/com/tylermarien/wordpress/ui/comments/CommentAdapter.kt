@@ -1,10 +1,12 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.comments
 
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.tylermarien.wordpress.R
 import com.tylermarien.wordpress.data.Comment
+import com.tylermarien.wordpress.utils.fromHtml
 import kotlinx.android.synthetic.main.view_comment.view.*
 import java.text.SimpleDateFormat
 

@@ -1,7 +1,8 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.comments
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.tylermarien.wordpress.utils.Status
 import com.tylermarien.wordpress.data.Comment
 import com.tylermarien.wordpress.data.CommentRepository
 import com.tylermarien.wordpress.data.Post

@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.utils
 
 import android.os.Build
 import android.text.Html

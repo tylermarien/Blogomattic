@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.posts
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

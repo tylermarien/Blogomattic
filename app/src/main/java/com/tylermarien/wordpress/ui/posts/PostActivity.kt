@@ -1,4 +1,4 @@
-package com.tylermarien.wordpress
+package com.tylermarien.wordpress.ui.posts
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,7 +10,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_post.*
 import java.text.SimpleDateFormat
 import android.util.DisplayMetrics
+import com.tylermarien.wordpress.utils.PicassoImageGetter
+import com.tylermarien.wordpress.R
 import com.tylermarien.wordpress.data.Post
+import com.tylermarien.wordpress.utils.fromHtml
+import com.tylermarien.wordpress.ui.comments.CommentsActivity
 
 class PostActivity: AppCompatActivity() {
 
@@ -34,7 +38,10 @@ class PostActivity: AppCompatActivity() {
 
                 authorView.text = it.author.name
                 dateView.text = DateFormatter.format(it.date)
-                contentView.text = fromHtml(it.content, PicassoImageGetter(contentView, this, maxWidth))
+                contentView.text = fromHtml(
+                    it.content,
+                    PicassoImageGetter(contentView, this, maxWidth)
+                )
                 contentView.movementMethod = LinkMovementMethod.getInstance()
                 commentsCountView.text = it.discussion.commentsCount.toString()
                 commentsIconView.setOnClickListener { _ -> openComments(it) }
