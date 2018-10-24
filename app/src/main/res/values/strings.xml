@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WordPress</string>
+    <string name="app_name">Blogomattic</string>
 
     <string name="title">Title</string>
     <string name="excerpt">Excerpt</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tylermarien.wordpress">
+    package="com.tylermarien.blogomattic">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.posts.PostsActivity">
+        <activity android:name="com.tylermarien.blogomattic.ui.posts.PostsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.posts.PostActivity" />
-        <activity android:name=".ui.comments.CommentsActivity" />
+        <activity android:name="com.tylermarien.blogomattic.ui.posts.PostActivity" />
+        <activity android:name="com.tylermarien.blogomattic.ui.comments.CommentsActivity" />
     </application>
 
 </manifest>
