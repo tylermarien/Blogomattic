@@ -10,6 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_post.*
 import java.text.SimpleDateFormat
 import android.util.DisplayMetrics
+import android.view.WindowManager
 import com.tylermarien.blogomattic.utils.PicassoImageGetter
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
@@ -26,12 +27,26 @@ class PostActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
+        setupActionBar()
+        setupObservers()
+        setupModel()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val maxWidth = displayMetrics.widthPixels.toFloat() + (16 * displayMetrics.density)
-
+    private fun setupObservers() {
+        val maxWidth = calculateMaxWidth(windowManager)
         model.post.observe(this, Observer { post ->
             post?.let {
                 title = it.title
@@ -48,17 +63,16 @@ class PostActivity: AppCompatActivity() {
                 commentsCountView.setOnClickListener { _ -> openComments(it) }
             }
         })
+    }
 
+    private fun setupModel() {
         model.post.value = intent.getParcelableExtra(PARAM_POST)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) {
-            onBackPressed()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
+    private fun calculateMaxWidth(windowManager: WindowManager): Float {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        return displayMetrics.widthPixels.toFloat() - (CONTENT_PADDING * displayMetrics.density)
     }
 
     private fun openComments(post: Post) {
@@ -71,6 +85,7 @@ class PostActivity: AppCompatActivity() {
 
     companion object {
         const val PARAM_POST = "POST"
+        private const val CONTENT_PADDING = 16
         private val DateFormatter = SimpleDateFormat("MMMM d, YYYY")
     }
 
