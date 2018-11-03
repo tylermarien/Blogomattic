@@ -10,12 +10,11 @@ import com.tylermarien.blogomattic.ui.dialogs.ErrorDialog
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.utils.Status
 import kotlinx.android.synthetic.main.activity_comments.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class CommentsActivity: AppCompatActivity() {
 
-    private val model by lazy {
-        ViewModelProviders.of(this).get(CommentsViewModel::class.java)
-    }
+    private val model: CommentsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

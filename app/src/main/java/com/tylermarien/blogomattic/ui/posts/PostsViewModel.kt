@@ -7,9 +7,8 @@ import com.tylermarien.blogomattic.data.Post
 import com.tylermarien.blogomattic.data.PostRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class PostsViewModel: ViewModel() {
+class PostsViewModel(private val postRepo: PostRepository): ViewModel() {
     private val disposables = CompositeDisposable()
-    private val postRepo = PostRepository()
 
     val status = MutableLiveData<Status>()
     val error = MutableLiveData<String>()

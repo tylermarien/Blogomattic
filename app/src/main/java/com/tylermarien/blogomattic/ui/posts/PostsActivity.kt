@@ -11,12 +11,11 @@ import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.utils.Status
 import com.tylermarien.blogomattic.data.Post
 import kotlinx.android.synthetic.main.activity_posts.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PostsActivity : AppCompatActivity(), PostAdapter.OnClickListener {
 
-    private val model by lazy {
-        ViewModelProviders.of(this).get(PostsViewModel::class.java)
-    }
+    private val model: PostsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

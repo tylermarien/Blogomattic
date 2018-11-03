@@ -16,12 +16,11 @@ import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
 import com.tylermarien.blogomattic.utils.fromHtml
 import com.tylermarien.blogomattic.ui.comments.CommentsActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PostActivity: AppCompatActivity() {
 
-    private val model by lazy {
-        ViewModelProviders.of(this).get(PostViewModel::class.java)
-    }
+    private val model: PostViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
