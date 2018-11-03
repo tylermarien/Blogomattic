@@ -5,10 +5,10 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class PostRepository {
+class PostRepository(private val service: WordPressService) {
 
     fun allPosts(): Single<List<Post>> {
-        return WordPressService.instance.allPosts()
+        return service.allPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.posts }

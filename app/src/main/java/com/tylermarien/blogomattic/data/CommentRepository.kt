@@ -5,10 +5,10 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class CommentRepository {
+class CommentRepository(private val service: WordPressService) {
 
     fun commentsByPost(postId: Int): Single<List<Comment>> {
-        return WordPressService.instance.commentsByPost(postId)
+        return service.commentsByPost(postId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.comments }

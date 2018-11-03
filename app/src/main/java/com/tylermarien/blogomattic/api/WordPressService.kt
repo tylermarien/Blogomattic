@@ -21,31 +21,7 @@ interface WordPressService {
     fun commentsByPost(@Path("postId") postId: Int): Single<CommentsResponse>
 
     companion object {
-        private const val BASE_URL =
+        const val BASE_URL =
             "https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/"
-
-        private val interceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        private val client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        private var moshi = Moshi.Builder()
-            .add(Date::class.java, Rfc3339DateJsonAdapter())
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
-        private val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(client)
-            .build()
-
-        val instance: WordPressService = retrofit.create(
-            WordPressService::class.java)
     }
-
 }
