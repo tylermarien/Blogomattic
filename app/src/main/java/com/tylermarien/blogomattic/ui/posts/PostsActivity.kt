@@ -1,11 +1,11 @@
 package com.tylermarien.blogomattic.ui.posts
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tylermarien.blogomattic.ui.dialogs.ErrorDialog
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.utils.Status

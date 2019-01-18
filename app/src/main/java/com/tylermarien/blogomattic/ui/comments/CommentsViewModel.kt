@@ -1,7 +1,7 @@
 package com.tylermarien.blogomattic.ui.comments
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.tylermarien.blogomattic.utils.Status
 import com.tylermarien.blogomattic.data.Comment
 import com.tylermarien.blogomattic.data.CommentRepository
