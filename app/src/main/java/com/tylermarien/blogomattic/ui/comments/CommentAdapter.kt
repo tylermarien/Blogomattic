@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Comment
-import com.tylermarien.blogomattic.utils.fromHtml
+import com.tylermarien.blogomattic.utils.formatComment
 import kotlinx.android.synthetic.main.view_comment.view.*
 import java.text.SimpleDateFormat
 
@@ -28,7 +28,7 @@ class CommentAdapter(
 
         holder.view.authorView.text = comment.author.name
         holder.view.dateView.text = DateFormatter.format(comment.date)
-        holder.view.contentView.text = fromHtml(comment.content)
+        holder.view.contentView.text = formatComment(comment.content)
     }
 
     class ViewHolder(val view: CardView): RecyclerView.ViewHolder(view)

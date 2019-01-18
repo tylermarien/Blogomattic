@@ -1,7 +1,6 @@
 package com.tylermarien.blogomattic.ui.posts
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,7 @@ import android.view.WindowManager
 import com.tylermarien.blogomattic.utils.PicassoImageGetter
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
-import com.tylermarien.blogomattic.utils.fromHtml
+import com.tylermarien.blogomattic.utils.formatContent
 import com.tylermarien.blogomattic.ui.comments.CommentsActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -52,7 +51,7 @@ class PostActivity: AppCompatActivity() {
 
                 authorView.text = it.author.name
                 dateView.text = DateFormatter.format(it.date)
-                contentView.text = fromHtml(
+                contentView.text = formatContent(
                     it.content,
                     PicassoImageGetter(contentView, this, maxWidth)
                 )
