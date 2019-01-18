@@ -15,6 +15,7 @@ import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
 import com.tylermarien.blogomattic.utils.formatContent
 import com.tylermarien.blogomattic.ui.comments.CommentsActivity
+import com.tylermarien.blogomattic.utils.formatTitle
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PostActivity: AppCompatActivity() {
@@ -47,7 +48,7 @@ class PostActivity: AppCompatActivity() {
         val maxWidth = calculateMaxWidth(windowManager)
         model.post.observe(this, Observer { post ->
             post?.let {
-                title = it.title
+                title = formatTitle(it.title)
 
                 authorView.text = it.author.name
                 dateView.text = DateFormatter.format(it.date)
