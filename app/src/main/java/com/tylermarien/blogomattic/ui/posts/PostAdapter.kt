@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
 import com.tylermarien.blogomattic.utils.formatExcerpt
+import com.tylermarien.blogomattic.utils.formatTitle
 import kotlinx.android.synthetic.main.view_post.view.*
 import java.text.SimpleDateFormat
 
@@ -34,7 +35,7 @@ class PostAdapter(
         holder.view.setOnClickListener {
             listener.onPostClicked(post)
         }
-        holder.view.titleView.text = post.title
+        holder.view.titleView.text = formatTitle(post.title)
         holder.view.excerptView.text = formatExcerpt(post.excerpt)
         holder.view.authorView.text = post.author.name
         holder.view.dateView.text = DateFormatter.format(post.date)
