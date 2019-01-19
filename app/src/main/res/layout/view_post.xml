@@ -30,14 +30,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
+        <ImageView
+            android:id="@+id/avatarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/excerptView" />
+
         <TextView
             android:id="@+id/authorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/author"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/excerptView" />
+            app:layout_constraintStart_toEndOf="@+id/avatarView"
+            app:layout_constraintTop_toTopOf="@+id/avatarView" />
 
         <TextView
             android:id="@+id/dateView"

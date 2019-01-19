@@ -4,17 +4,24 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
+import com.tylermarien.blogomattic.utils.CircleTransform
 import com.tylermarien.blogomattic.utils.formatExcerpt
 import com.tylermarien.blogomattic.utils.formatTitle
 import kotlinx.android.synthetic.main.view_post.view.*
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 import java.text.SimpleDateFormat
 
 class PostAdapter(
     val posts: List<Post>,
+    private val avatarSize: Int,
     private val listener: OnClickListener
-): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+): RecyclerView.Adapter<PostAdapter.ViewHolder>(), KoinComponent {
+
+    private val picasso: Picasso by inject()
 
     interface OnClickListener {
         fun onPostClicked(post: Post)
@@ -37,6 +44,12 @@ class PostAdapter(
         }
         holder.view.titleView.text = formatTitle(post.title)
         holder.view.excerptView.text = formatExcerpt(post.excerpt)
+
+        picasso.load(post.author.avatarUrl)
+            .resize(avatarSize, avatarSize)
+            .transform(CircleTransform())
+            .into(holder.view.avatarView)
+
         holder.view.authorView.text = post.author.name
         holder.view.dateView.text = DateFormatter.format(post.date)
         holder.view.commentsCountView.text = post.discussion.commentsCount.toString()

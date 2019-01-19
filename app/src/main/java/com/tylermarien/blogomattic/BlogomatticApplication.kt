@@ -4,6 +4,7 @@ import android.app.Application
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.Picasso
 import com.tylermarien.blogomattic.api.WordPressService
 import com.tylermarien.blogomattic.data.CommentRepository
 import com.tylermarien.blogomattic.data.PostRepository
@@ -11,6 +12,7 @@ import com.tylermarien.blogomattic.ui.comments.CommentsViewModel
 import com.tylermarien.blogomattic.ui.posts.PostViewModel
 import com.tylermarien.blogomattic.ui.posts.PostsViewModel
 import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
@@ -34,6 +36,8 @@ val appModule = module {
     // Repositories
     single { PostRepository(get()) }
     single { CommentRepository(get()) }
+
+    single { Picasso.with(androidContext()) }
 
     // ViewModels
     viewModel { PostsViewModel(get()) }
