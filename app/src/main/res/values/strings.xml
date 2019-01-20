@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Blogomattic</string>
+    <plurals name="comments">
+        <item quantity="one">%d comment</item>
+        <item quantity="other">%d comments</item>
+    </plurals>
     <string name="chat_bubble">Chat Bubble</string>
 </resources>

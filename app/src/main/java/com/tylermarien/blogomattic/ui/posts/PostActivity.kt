@@ -65,9 +65,9 @@ class PostActivity: AppCompatActivity() {
                     PicassoImageGetter(contentView, this, maxWidth)
                 )
                 contentView.movementMethod = LinkMovementMethod.getInstance()
-                commentsCountView.text = it.discussion.commentsCount.toString()
-                commentsIconView.setOnClickListener { _ -> openComments(it) }
-                commentsCountView.setOnClickListener { _ -> openComments(it) }
+                commentsCountView.text = resources.getQuantityString(R.plurals.comments, it.discussion.commentsCount, it.discussion.commentsCount)
+                commentsIconView.setOnClickListener { openComments(it) }
+                commentsCountView.setOnClickListener { openComments(it) }
             }
         })
     }
