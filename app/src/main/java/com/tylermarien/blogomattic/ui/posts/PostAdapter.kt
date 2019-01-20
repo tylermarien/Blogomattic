@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.view_post.view.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.text.SimpleDateFormat
+import java.util.*
 
 class PostAdapter(
     val posts: List<Post>,
@@ -38,6 +39,7 @@ class PostAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
+        val formatter = SimpleDateFormat("MMMM d, YYYY", Locale.getDefault())
 
         holder.view.setOnClickListener {
             listener.onPostClicked(post)
@@ -51,13 +53,9 @@ class PostAdapter(
             .into(holder.view.avatarView)
 
         holder.view.authorView.text = post.author.name
-        holder.view.dateView.text = DateFormatter.format(post.date)
+        holder.view.dateView.text = formatter.format(post.date)
         holder.view.commentsCountView.text = post.discussion.commentsCount.toString()
     }
 
     class ViewHolder(val view: CardView): RecyclerView.ViewHolder(view)
-
-    companion object {
-        private val DateFormatter = SimpleDateFormat("MMMM d, YYYY")
-    }
 }

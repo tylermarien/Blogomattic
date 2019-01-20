@@ -9,6 +9,7 @@ import com.tylermarien.blogomattic.data.Comment
 import com.tylermarien.blogomattic.utils.formatComment
 import kotlinx.android.synthetic.main.view_comment.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class CommentAdapter(
     private val comments: List<Comment>
@@ -25,15 +26,12 @@ class CommentAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val comment = comments[position]
+        val formatter = SimpleDateFormat("MMMM d, YYYY", Locale.getDefault())
 
         holder.view.authorView.text = comment.author.name
-        holder.view.dateView.text = DateFormatter.format(comment.date)
+        holder.view.dateView.text = formatter.format(comment.date)
         holder.view.contentView.text = formatComment(comment.content)
     }
 
     class ViewHolder(val view: CardView): RecyclerView.ViewHolder(view)
-
-    companion object {
-        private val DateFormatter = SimpleDateFormat("MMMM d, YYYY")
-    }
 }

@@ -15,6 +15,7 @@ import com.tylermarien.blogomattic.ui.comments.CommentsActivity
 import com.tylermarien.blogomattic.utils.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 class PostActivity: AppCompatActivity() {
 
@@ -46,6 +47,7 @@ class PostActivity: AppCompatActivity() {
     private fun setupObservers() {
         val maxWidth = calculateMaxWidth(CONTENT_PADDING, windowManager)
         val avatarSide = convertPixelsToDp(AVATAR_SIZE_IN_DP, this)
+        val formatter = SimpleDateFormat("MMMM d, YYYY", Locale.getDefault())
 
         model.post.observe(this, Observer { post ->
             post?.let {
@@ -59,15 +61,15 @@ class PostActivity: AppCompatActivity() {
                     .into(avatarView)
 
                 authorView.text = it.author.name
-                dateView.text = DateFormatter.format(it.date)
+                dateView.text = formatter.format(it.date)
                 contentView.text = formatContent(
                     it.content,
                     PicassoImageGetter(contentView, this, maxWidth)
                 )
                 contentView.movementMethod = LinkMovementMethod.getInstance()
                 commentsCountView.text = resources.getQuantityString(R.plurals.comments, it.discussion.commentsCount, it.discussion.commentsCount)
-                commentsIconView.setOnClickListener { openComments(it) }
-                commentsCountView.setOnClickListener { openComments(it) }
+                commentsIconView.setOnClickListener { _ -> openComments(it) }
+                commentsCountView.setOnClickListener { _ -> openComments(it) }
             }
         })
     }
@@ -88,7 +90,6 @@ class PostActivity: AppCompatActivity() {
         const val PARAM_POST = "POST"
         private const val CONTENT_PADDING = 16
         private const val AVATAR_SIZE_IN_DP = 24
-        private val DateFormatter = SimpleDateFormat("MMMM d, YYYY")
     }
 
 }
