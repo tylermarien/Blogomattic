@@ -10,6 +10,7 @@ import com.tylermarien.blogomattic.ui.dialogs.ErrorDialog
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.utils.Status
 import com.tylermarien.blogomattic.data.Post
+import com.tylermarien.blogomattic.utils.convertPixelsToDp
 import kotlinx.android.synthetic.main.activity_posts.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
@@ -44,9 +45,10 @@ class PostsActivity : AppCompatActivity(), PostAdapter.OnClickListener {
             refresh.isRefreshing = it == Status.LOADING
         })
 
+        val avatarSize = convertPixelsToDp(AVATAR_SIZE_IN_DP, this)
         model.posts.observe(this, Observer {
             if (it != null) {
-                posts.adapter = PostAdapter(it, getAvatarSizeInPixels(), this)
+                posts.adapter = PostAdapter(it, avatarSize, this)
             }
         })
 
@@ -61,9 +63,6 @@ class PostsActivity : AppCompatActivity(), PostAdapter.OnClickListener {
             model.loadPosts()
         }
     }
-
-    private fun getAvatarSizeInPixels() =
-        (AVATAR_SIZE_IN_DP * resources.displayMetrics.density).roundToInt()
 
     companion object {
         private const val AVATAR_SIZE_IN_DP = 24

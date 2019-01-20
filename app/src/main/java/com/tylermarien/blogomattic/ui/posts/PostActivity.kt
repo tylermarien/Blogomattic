@@ -8,20 +8,13 @@ import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_post.*
 import java.text.SimpleDateFormat
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import com.squareup.picasso.Picasso
-import com.tylermarien.blogomattic.utils.PicassoImageGetter
 import com.tylermarien.blogomattic.R
 import com.tylermarien.blogomattic.data.Post
-import com.tylermarien.blogomattic.utils.formatContent
 import com.tylermarien.blogomattic.ui.comments.CommentsActivity
-import com.tylermarien.blogomattic.utils.CircleTransform
-import com.tylermarien.blogomattic.utils.formatTitle
-import kotlinx.android.synthetic.main.view_post.view.*
+import com.tylermarien.blogomattic.utils.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import kotlin.math.roundToInt
 
 class PostActivity: AppCompatActivity() {
 
@@ -51,7 +44,9 @@ class PostActivity: AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        val maxWidth = calculateMaxWidth(windowManager)
+        val maxWidth = calculateMaxWidth(CONTENT_PADDING, windowManager)
+        val avatarSide = convertPixelsToDp(AVATAR_SIZE_IN_DP, this)
+
         model.post.observe(this, Observer { post ->
             post?.let {
                 title = formatTitle(it.title)
@@ -59,7 +54,7 @@ class PostActivity: AppCompatActivity() {
                 titleView.text = formatTitle(it.title)
 
                 picasso.load(post.author.avatarUrl)
-                    .resize(getAvatarSizeInPixels(), getAvatarSizeInPixels())
+                    .resize(avatarSide, avatarSide)
                     .transform(CircleTransform())
                     .into(avatarView)
 
@@ -81,12 +76,6 @@ class PostActivity: AppCompatActivity() {
         model.post.value = intent.getParcelableExtra(PARAM_POST)
     }
 
-    private fun calculateMaxWidth(windowManager: WindowManager): Float {
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.widthPixels.toFloat() - (CONTENT_PADDING * displayMetrics.density)
-    }
-
     private fun openComments(post: Post) {
         val intent = Intent(this, CommentsActivity::class.java).apply {
             putExtra(CommentsActivity.PARAM_POST, post)
@@ -94,9 +83,6 @@ class PostActivity: AppCompatActivity() {
 
         startActivity(intent)
     }
-
-    private fun getAvatarSizeInPixels() =
-        (AVATAR_SIZE_IN_DP * resources.displayMetrics.density).roundToInt()
 
     companion object {
         const val PARAM_POST = "POST"
