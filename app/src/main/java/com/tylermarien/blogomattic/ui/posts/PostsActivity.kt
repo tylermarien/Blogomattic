@@ -1,7 +1,6 @@
 package com.tylermarien.blogomattic.ui.posts
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,6 @@ import com.tylermarien.blogomattic.data.Post
 import com.tylermarien.blogomattic.utils.convertPixelsToDp
 import kotlinx.android.synthetic.main.activity_posts.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import kotlin.math.roundToInt
 
 class PostsActivity : AppCompatActivity(), PostAdapter.OnClickListener {
 
